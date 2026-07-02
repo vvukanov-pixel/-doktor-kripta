@@ -1,202 +1,150 @@
 <!doctype html>
 <html lang="hr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#07111f">
-  <link rel="manifest" href="manifest.json">
-  <link rel="apple-touch-icon" href="icon.svg">
-  <title>Doktor Kripta</title>
-  <style>
-    :root{--bg:#050914;--card:#111827;--card2:#0b1220;--line:#263244;--txt:#fff;--muted:#9ca3af;--green:#22c55e;--red:#ef4444;--yellow:#f59e0b;--blue:#38bdf8}
-    *{box-sizing:border-box}
-    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--txt)}
-    header{padding:18px 16px;background:#0f172a;position:sticky;top:0;z-index:5;border-bottom:1px solid var(--line)}
-    h1{margin:0;font-size:28px}.sub{color:var(--muted);font-size:14px;margin-top:3px}
-    main{padding:14px;max-width:880px;margin:auto}
-    .toolbar{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
-    button,select,input,textarea{width:100%;padding:13px;border-radius:13px;border:1px solid #334155;background:#030712;color:white;font-size:15px}
-    button{background:var(--green);color:#06120a;font-weight:900;border:0}.secondary{background:#1f2937;color:white;border:1px solid #334155}
-    .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;margin:12px 0;box-shadow:0 8px 24px rgba(0,0,0,.16)}
-    .row{display:flex;justify-content:space-between;gap:10px;align-items:center}
-    .coin{font-weight:900;font-size:21px}.price{font-size:21px;font-weight:900}
-    .green{color:var(--green)}.red{color:var(--red)}.yellow{color:var(--yellow)}.blue{color:var(--blue)}.gray{color:var(--muted)}
-    .diag{font-size:15px;color:#d1d5db;margin-top:10px;line-height:1.42}
-    .pill{font-size:12px;padding:5px 8px;border-radius:99px;background:#030712;border:1px solid #374151;white-space:nowrap}
-    .grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:10px}
-    .box{background:#030712;border:1px solid #334155;border-radius:12px;padding:9px}
-    .label{font-size:11px;color:var(--muted)} .val{font-size:14px;font-weight:900;margin-top:3px}
-    canvas{width:100%;height:125px;margin-top:10px;background:#030712;border-radius:12px;border:1px solid #334155}
-    textarea{min-height:74px;resize:vertical}
-    .tabs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:8px 0}
-    .tab{background:#0b1220;color:white;border:1px solid #334155}.active{background:#22c55e;color:#06120a}
-    .small{font-size:12px;color:#8b95a7}
-    footer{padding:16px;color:#6b7280;font-size:12px;text-align:center}
-    @media(max-width:520px){.grid{grid-template-columns:1fr 1fr}.toolbar{grid-template-columns:1fr}.tabs{grid-template-columns:1fr 1fr 1fr}h1{font-size:25px}}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#06111f">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon.svg">
+<title>Doktor Kripta PRO</title>
+<style>
+:root{--bg:#050914;--card:#111827;--card2:#0b1220;--line:#263244;--txt:#fff;--muted:#9ca3af;--green:#22c55e;--red:#ef4444;--yellow:#f59e0b;--blue:#38bdf8}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--txt)}
+header{padding:18px 16px;background:#0f172a;position:sticky;top:0;z-index:5;border-bottom:1px solid var(--line)}
+h1{margin:0;font-size:28px}.sub{color:var(--muted);font-size:14px;margin-top:3px}
+main{padding:14px;max-width:920px;margin:auto}
+button,select,input,textarea{width:100%;padding:13px;border-radius:13px;border:1px solid #334155;background:#030712;color:white;font-size:15px}
+button{background:var(--green);color:#06120a;font-weight:900;border:0}.secondary{background:#1f2937;color:white;border:1px solid #334155}
+.toolbar,.tabs{display:grid;gap:8px}.toolbar{grid-template-columns:1fr 1fr}.tabs{grid-template-columns:1fr 1fr 1fr;margin:8px 0}
+.tab{background:#0b1220;color:white;border:1px solid #334155}.active{background:#22c55e;color:#06120a}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;margin:12px 0;box-shadow:0 8px 24px rgba(0,0,0,.16)}
+.row{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.coin{font-weight:900;font-size:21px}.price{font-size:21px;font-weight:900}
+.green{color:var(--green)}.red{color:var(--red)}.yellow{color:var(--yellow)}.blue{color:var(--blue)}.gray{color:var(--muted)}
+.pill{font-size:12px;padding:5px 8px;border-radius:99px;background:#030712;border:1px solid #374151;white-space:nowrap}
+.diag{font-size:15px;color:#d1d5db;margin-top:10px;line-height:1.42}
+.grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:10px}
+.box{background:#030712;border:1px solid #334155;border-radius:12px;padding:9px}
+.label{font-size:11px;color:var(--muted)} .val{font-size:14px;font-weight:900;margin-top:3px}
+canvas{width:100%;height:132px;margin-top:10px;background:#030712;border-radius:12px;border:1px solid #334155}
+textarea{min-height:90px;resize:vertical}
+footer{padding:16px;color:#6b7280;font-size:12px;text-align:center}
+@media(max-width:520px){.grid{grid-template-columns:1fr 1fr}.toolbar{grid-template-columns:1fr}.tabs{grid-template-columns:1fr 1fr 1fr}h1{font-size:25px}}
+</style>
 </head>
 <body>
 <header>
-  <h1>🩺 Doktor Kripta</h1>
-  <div class="sub">cijene · graf · signal · alarm · plan naloga</div>
+<h1>🩺 Doktor Kripta PRO</h1>
+<div class="sub">live cijene · graf 24h · RSI · signal · alarm · plan</div>
 </header>
 
 <main>
-  <div class="toolbar">
-    <button onclick="loadAll()">Osvježi tržište</button>
-    <button class="secondary" onclick="toggleAuto()" id="autoBtn">Auto refresh: OFF</button>
-  </div>
+<div class="toolbar">
+<button onclick="loadAll()">Osvježi tržište</button>
+<button class="secondary" onclick="toggleAuto()" id="autoBtn">Auto refresh: OFF</button>
+</div>
 
-  <div class="tabs">
-    <button class="tab active" onclick="setMode('market',this)">Tržište</button>
-    <button class="tab" onclick="setMode('alarms',this)">Alarmi</button>
-    <button class="tab" onclick="setMode('plan',this)">Plan</button>
-  </div>
+<div class="tabs">
+<button class="tab active" onclick="setMode('market',this)">Tržište</button>
+<button class="tab" onclick="setMode('alarms',this)">Alarmi</button>
+<button class="tab" onclick="setMode('plan',this)">Plan</button>
+</div>
 
-  <section id="market">
-    <div class="card">
-      <div class="row"><b>Glavna dijagnoza</b><span class="pill" id="status">čekam refresh</span></div>
-      <div class="diag" id="mainDiag">Pritisni “Osvježi tržište”.</div>
-    </div>
-    <div id="list"></div>
-  </section>
+<section id="market">
+<div class="card">
+<div class="row"><b>Glavna dijagnoza</b><span class="pill" id="status">čekam refresh</span></div>
+<div class="diag" id="mainDiag">Pritisni “Osvježi tržište”.</div>
+</div>
+<div id="list"></div>
+</section>
 
-  <section id="alarms" style="display:none">
-    <div class="card">
-      <div class="row"><b>Alarm cijene</b><span class="pill">sprema se u mobitel</span></div>
-      <div class="grid">
-        <div><div class="label">Coin</div><select id="alarmCoin"><option>SUI</option><option>BTC</option><option>ETH</option><option>SOL</option><option>LINK</option><option>AVAX</option><option>NEAR</option><option>PEPE</option><option>SHIB</option></select></div>
-        <div><div class="label">Cijena ispod</div><input id="alarmBelow" placeholder="npr. 0.62"></div>
-        <div><div class="label">Cijena iznad</div><input id="alarmAbove" placeholder="npr. 0.72"></div>
-      </div>
-      <div style="margin-top:10px"><button onclick="saveAlarm()">Spremi alarm</button></div>
-      <div class="diag" id="alarmText"></div>
-    </div>
-    <div class="card">
-      <b>Napomena</b>
-      <div class="diag">Ova verzija provjerava alarm kad otvoriš aplikaciju ili pritisneš osvježi. Za pravi push alarm dok je aplikacija zatvorena treba backend.</div>
-    </div>
-  </section>
+<section id="alarms" style="display:none">
+<div class="card">
+<div class="row"><b>Alarm cijene</b><span class="pill">lokalni alarm</span></div>
+<div class="grid">
+<div><div class="label">Coin</div><select id="alarmCoin"><option>SUI</option><option>BTC</option><option>ETH</option><option>SOL</option><option>LINK</option><option>AVAX</option><option>NEAR</option><option>PEPE</option><option>SHIB</option></select></div>
+<div><div class="label">Ispod</div><input id="alarmBelow" placeholder="npr. 0.62"></div>
+<div><div class="label">Iznad</div><input id="alarmAbove" placeholder="npr. 0.72"></div>
+</div>
+<div style="margin-top:10px"><button onclick="saveAlarm()">Spremi alarm</button></div>
+<div class="diag" id="alarmText"></div>
+</div>
+<div class="card"><b>Važno</b><div class="diag">Ova verzija provjerava alarm kad je aplikacija otvorena ili kad pritisneš osvježi. Prave push obavijesti dok je app zatvoren traže backend.</div></div>
+</section>
 
-  <section id="plan" style="display:none">
-    <div class="card">
-      <div class="row"><b>Tvoj plan</b><span class="pill" id="savedAt">nije spremljeno</span></div>
-      <textarea id="note" placeholder="Primjer: SUI ulaz 0.62, prodaja 0.72. BTC pratiti do ponoći."></textarea>
-      <div style="margin-top:10px"><button onclick="saveNote()">Spremi bilješku</button></div>
-    </div>
-  </section>
+<section id="plan" style="display:none">
+<div class="card">
+<div class="row"><b>Tvoj plan trgovanja</b><span class="pill" id="savedAt">nije spremljeno</span></div>
+<textarea id="note" placeholder="Primjer: SUI ulaz 0.62, prodaja 0.72. BTC pratiti do ponoći."></textarea>
+<div style="margin-top:10px"><button onclick="saveNote()">Spremi plan</button></div>
+</div>
+</section>
 </main>
 
-<footer>Demo PWA. Nije financijski savjet. Ne sadrži API ključeve ni pristup tvojoj burzi.</footer>
+<footer>Doktor Kripta PRO. Nije financijski savjet. Nema API ključeva ni pristup tvojoj burzi.</footer>
 
 <script>
-const coins = [
-  ["bitcoin","BTC"],["ethereum","ETH"],["solana","SOL"],["sui","SUI"],
-  ["chainlink","LINK"],["avalanche-2","AVAX"],["near","NEAR"],
-  ["pepe","PEPE"],["shiba-inu","SHIB"]
-];
-let latest = {};
-let autoTimer = null;
+const coins=[["bitcoin","BTC"],["ethereum","ETH"],["solana","SOL"],["sui","SUI"],["chainlink","LINK"],["avalanche-2","AVAX"],["near","NEAR"],["pepe","PEPE"],["shiba-inu","SHIB"]];
+let latest={}, autoTimer=null;
 
-function setMode(id, btn){
-  ["market","alarms","plan"].forEach(x=>document.getElementById(x).style.display = x===id ? "block":"none");
-  document.querySelectorAll(".tab").forEach(b=>b.classList.remove("active"));
-  btn.classList.add("active");
+function setMode(id,btn){["market","alarms","plan"].forEach(x=>document.getElementById(x).style.display=x===id?"block":"none");document.querySelectorAll(".tab").forEach(b=>b.classList.remove("active"));btn.classList.add("active")}
+function fmtPrice(p){if(p===undefined||p===null)return"n/a";if(p<0.01)return"$"+Number(p).toPrecision(4);return"$"+Number(p).toLocaleString("en-US",{maximumFractionDigits:4})}
+function fmtPct(x){return(x===undefined||x===null)?"n/a":x.toFixed(2)+"%"}
+function sma(a,n){return(!a||a.length<n)?null:a.slice(-n).reduce((x,y)=>x+y,0)/n}
+function rsi(prices){if(!prices||prices.length<15)return null;let g=0,l=0;for(let i=prices.length-14;i<prices.length;i++){let d=prices[i]-prices[i-1];if(d>=0)g+=d;else l-=d}if(l===0)return 100;let rs=(g/14)/(l/14);return 100-(100/(1+rs))}
+function decision(change,rv,price,ma20,ma50,vol){
+ let score=0;
+ if(change>4)score+=2;else if(change>1)score+=1;else if(change<-4)score-=2;else if(change<-1)score-=1;
+ if(rv!==null){if(rv<32)score+=1;if(rv>72)score-=1}
+ if(ma20){score+=price>ma20?1:-1}
+ if(ma50){score+=price>ma50?1:-1}
+ if(vol>100000000)score+=0.5;
+ if(score>=3)return["green","KUPI / JAK MOMENTUM","Kupci imaju prednost. Ne juriti svijeću, čekati povrat i potvrdu volumena."];
+ if(score>=1)return["green","DRŽI / TRAŽI ULAZ","Smjer je blago pozitivan. Najbolje raditi s jasnim ulazom i stop zonom."];
+ if(score>-1)return["yellow","ČEKAJ","Nema dovoljno čistog signala. Strpljenje je bolji trade od ulaza naslijepo."];
+ if(score<=-3)return["red","PRODAJ / IZBJEGAVAJ","Pritisak prodaje je jak. Prvo čekati stabilizaciju i dno."];
+ return["red","OPREZ","Slabost je prisutna. Ulaz samo mali i uz strogi plan."];
 }
-function fmtPrice(p){ if(p === undefined) return "n/a"; if(p < 0.01) return "$"+Number(p).toPrecision(4); return "$"+Number(p).toLocaleString("en-US",{maximumFractionDigits:4});}
-function fmtPct(x){ return (x===undefined || x===null) ? "n/a" : x.toFixed(2)+"%"; }
-function level(change){
-  if(change > 4) return ["green","KUPCI JAKI","Momentum je jak. Za ulaz čekaj povrat ili potvrdu nastavka; ne juriti vrh."];
-  if(change > 1) return ["green","BLAGO KUPI","Kupci imaju prednost. Najbolje rade ulazi na povrat prema podršci."];
-  if(change > -1) return ["yellow","ČEKAJ","Nema čiste dijagnoze. Čekati izlazak iz raspona i volumen."];
-  if(change > -4) return ["red","OPREZ","Prodavači pritišću. Ulaz samo blizu podrške i s manjim rizikom."];
-  return ["red","NE HVATAJ NOŽ","Pritisak prodaje. Prvo stabilizacija, zatim potvrda volumena."];
-}
-function shortForecast(ch){
-  if(ch > 3) return ["2h: moguć nastavak gore", "6h: čuvati dobit", "24h: volatilno zeleno"];
-  if(ch > 0.5) return ["2h: blago gore", "6h: raspon", "24h: pozitivan nagib"];
-  if(ch > -0.5) return ["2h: neutralno", "6h: čekanje", "24h: bez jasnog smjera"];
-  if(ch > -3) return ["2h: pritisak dolje", "6h: traži podršku", "24h: oprez"];
-  return ["2h: jako slabo", "6h: moguć bounce ali rizičan", "24h: crvena zona"];
-}
-function saveNote(){ localStorage.setItem("dk_note", document.getElementById("note").value); localStorage.setItem("dk_saved", new Date().toLocaleString("hr-HR")); loadNote();}
-function loadNote(){ document.getElementById("note").value = localStorage.getItem("dk_note") || ""; document.getElementById("savedAt").textContent = localStorage.getItem("dk_saved") || "nije spremljeno";}
-function saveAlarm(){
-  const a = {coin:alarmCoin.value, below:alarmBelow.value, above:alarmAbove.value};
-  localStorage.setItem("dk_alarm", JSON.stringify(a)); loadAlarm(); checkAlarm();
-}
-function loadAlarm(){
-  const a = JSON.parse(localStorage.getItem("dk_alarm") || "{}");
-  if(a.coin) alarmCoin.value=a.coin; alarmBelow.value=a.below||""; alarmAbove.value=a.above||"";
-  alarmText.innerHTML = a.coin ? `Alarm spremljen za <b>${a.coin}</b>. Ispod: ${a.below||"-"} · Iznad: ${a.above||"-"}` : "Nema spremljenog alarma.";
-}
-function checkAlarm(){
-  const a = JSON.parse(localStorage.getItem("dk_alarm") || "{}");
-  if(!a.coin || !latest[a.coin]) return;
-  const p = latest[a.coin].price;
-  let msg = "";
-  if(a.below && p <= Number(a.below)) msg += `🚨 ${a.coin} je ispod ${a.below}. Trenutno: ${fmtPrice(p)}<br>`;
-  if(a.above && p >= Number(a.above)) msg += `🚨 ${a.coin} je iznad ${a.above}. Trenutno: ${fmtPrice(p)}<br>`;
-  if(msg){ alarmText.innerHTML = msg; try{ navigator.vibrate && navigator.vibrate([200,100,200]); }catch(e){} }
-}
-function drawSpark(canvas, prices){
-  const ctx = canvas.getContext("2d");
-  const w = canvas.width = canvas.clientWidth * devicePixelRatio;
-  const h = canvas.height = canvas.clientHeight * devicePixelRatio;
-  ctx.clearRect(0,0,w,h);
-  if(!prices || prices.length < 2) return;
-  const min = Math.min(...prices), max = Math.max(...prices), pad = 18 * devicePixelRatio;
-  ctx.lineWidth = 2.5 * devicePixelRatio; ctx.beginPath();
-  prices.forEach((p,i)=>{ const x=pad+i*(w-2*pad)/(prices.length-1); const y=h-pad-((p-min)/(max-min||1))*(h-2*pad); if(i===0)ctx.moveTo(x,y); else ctx.lineTo(x,y); });
-  ctx.strokeStyle = prices[prices.length-1] >= prices[0] ? "#22c55e" : "#ef4444"; ctx.stroke();
-}
-async function fetchChart(id){
-  try{ const r=await fetch(`https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=1`); if(!r.ok)return[]; const j=await r.json(); return (j.prices||[]).map(x=>x[1]); }catch(e){return[]}
-}
+function forecast(change,rv){if(change>3&&rv<70)return["2h: moguć nastavak gore","6h: čuvati dobit","24h: zeleno, ali volatilno"];if(change>0.5)return["2h: blago gore","6h: raspon prema gore","24h: pozitivan nagib"];if(change>-0.5)return["2h: neutralno","6h: čekanje","24h: bez jasnog smjera"];if(change>-3)return["2h: pritisak dolje","6h: traži podršku","24h: oprez"];return["2h: crvena zona","6h: rizičan bounce moguć","24h: slab trend"]}
+function saveNote(){localStorage.setItem("dk_note",note.value);localStorage.setItem("dk_saved",new Date().toLocaleString("hr-HR"));loadNote()}
+function loadNote(){note.value=localStorage.getItem("dk_note")||"";savedAt.textContent=localStorage.getItem("dk_saved")||"nije spremljeno"}
+function saveAlarm(){localStorage.setItem("dk_alarm",JSON.stringify({coin:alarmCoin.value,below:alarmBelow.value,above:alarmAbove.value}));loadAlarm();checkAlarm()}
+function loadAlarm(){const a=JSON.parse(localStorage.getItem("dk_alarm")||"{}");if(a.coin)alarmCoin.value=a.coin;alarmBelow.value=a.below||"";alarmAbove.value=a.above||"";alarmText.innerHTML=a.coin?`Alarm za <b>${a.coin}</b>. Ispod: ${a.below||"-"} · Iznad: ${a.above||"-"}`:"Nema spremljenog alarma."}
+function checkAlarm(){const a=JSON.parse(localStorage.getItem("dk_alarm")||"{}");if(!a.coin||!latest[a.coin])return;const p=latest[a.coin].price;let msg="";if(a.below&&p<=Number(a.below))msg+=`🚨 ${a.coin} ispod ${a.below}. Trenutno: ${fmtPrice(p)}<br>`;if(a.above&&p>=Number(a.above))msg+=`🚨 ${a.coin} iznad ${a.above}. Trenutno: ${fmtPrice(p)}<br>`;if(msg){alarmText.innerHTML=msg;try{navigator.vibrate&&navigator.vibrate([200,100,200])}catch(e){}}}
+function draw(canvas,prices){const ctx=canvas.getContext("2d"),w=canvas.width=canvas.clientWidth*devicePixelRatio,h=canvas.height=canvas.clientHeight*devicePixelRatio;ctx.clearRect(0,0,w,h);if(!prices||prices.length<2)return;const min=Math.min(...prices),max=Math.max(...prices),pad=18*devicePixelRatio;ctx.lineWidth=2.5*devicePixelRatio;ctx.beginPath();prices.forEach((p,i)=>{const x=pad+i*(w-2*pad)/(prices.length-1),y=h-pad-((p-min)/(max-min||1))*(h-2*pad);if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y)});ctx.strokeStyle=prices.at(-1)>=prices[0]?"#22c55e":"#ef4444";ctx.stroke()}
+async function chart(id){try{const r=await fetch(`https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=1`);if(!r.ok)return[];const j=await r.json();return(j.prices||[]).map(x=>x[1])}catch(e){return[]}}
 async function loadAll(){
-  const status=document.getElementById("status"), list=document.getElementById("list");
-  status.textContent="učitavam..."; list.innerHTML="";
-  try{
-    const ids=coins.map(c=>c[0]).join(",");
-    const url="https://api.coingecko.com/api/v3/simple/price?ids="+ids+"&vs_currencies=usd&include_24hr_change=true&include_24hr_vol=true&include_market_cap=true";
-    const res=await fetch(url); if(!res.ok) throw new Error("API error");
-    const data=await res.json(); const time=new Date().toLocaleString("hr-HR"); status.textContent=time; latest={};
-    let best=null,worst=null;
-    coins.forEach(([id,sym])=>{const d=data[id]||{}; const ch=d.usd_24h_change??0; latest[sym]={price:d.usd,change:ch}; if(!best||ch>best.ch)best={sym,ch}; if(!worst||ch<worst.ch)worst={sym,ch};});
-    document.getElementById("mainDiag").innerHTML=`Najbolji momentum: <b class="green">${best.sym} ${fmtPct(best.ch)}</b>. Najslabiji: <b class="red">${worst.sym} ${fmtPct(worst.ch)}</b>. Doktor čita 24h promjenu, volumen i kratki graf.`;
-    for(const [id,sym] of coins){
-      const d=data[id]||{}, ch=d.usd_24h_change??0; const [cls,tag,txt]=level(ch); const fc=shortForecast(ch);
-      const div=document.createElement("div"); div.className="card";
-      div.innerHTML=`
-        <div class="row">
-          <div><div class="coin">${sym}</div><div class="gray">${id}</div></div>
-          <div style="text-align:right"><div class="price">${fmtPrice(d.usd)}</div><div class="${cls}">${fmtPct(ch)}</div></div>
-        </div>
-        <div class="grid">
-          <div class="box"><div class="label">Market cap</div><div class="val">${d.usd_market_cap ? "$"+Math.round(d.usd_market_cap/1e9)+"B" : "n/a"}</div></div>
-          <div class="box"><div class="label">Volumen 24h</div><div class="val">${d.usd_24h_vol ? "$"+Math.round(d.usd_24h_vol/1e6)+"M" : "n/a"}</div></div>
-          <div class="box"><div class="label">Signal</div><div class="val ${cls}">${tag}</div></div>
-        </div>
-        <canvas id="c_${id}"></canvas>
-        <div class="grid">
-          <div class="box"><div class="label">Prognoza 2h</div><div class="val">${fc[0]}</div></div>
-          <div class="box"><div class="label">Prognoza 6h</div><div class="val">${fc[1]}</div></div>
-          <div class="box"><div class="label">Prognoza 24h</div><div class="val">${fc[2]}</div></div>
-        </div>
-        <div class="diag">${txt}</div>`;
-      list.appendChild(div); fetchChart(id).then(prices=>drawSpark(document.getElementById("c_"+id),prices));
-    }
-    checkAlarm();
-  }catch(e){
-    status.textContent="greška"; document.getElementById("mainDiag").textContent="Ne mogu dohvatiti cijene. Provjeri internet ili CoinGecko API limit.";
+ status.textContent="učitavam...";list.innerHTML="";
+ try{
+  const ids=coins.map(c=>c[0]).join(",");
+  const r=await fetch("https://api.coingecko.com/api/v3/simple/price?ids="+ids+"&vs_currencies=usd&include_24hr_change=true&include_24hr_vol=true&include_market_cap=true");
+  if(!r.ok)throw new Error("api");
+  const data=await r.json();status.textContent=new Date().toLocaleString("hr-HR");latest={};
+  const cards=[];
+  for(const [id,sym] of coins){
+    const d=data[id]||{},prices=await chart(id),price=d.usd,ch=d.usd_24h_change??0,rv=rsi(prices),ma20=sma(prices,20),ma50=sma(prices,50);
+    const dec=decision(ch,rv,price,ma20,ma50,d.usd_24h_vol||0);
+    cards.push({id,sym,d,prices,price,ch,rv,ma20,ma50,dec});latest[sym]={price,change:ch};
   }
+  const best=[...cards].sort((a,b)=>b.ch-a.ch)[0], worst=[...cards].sort((a,b)=>a.ch-b.ch)[0];
+  const buy=cards.filter(c=>c.dec[0]==="green").map(c=>c.sym).join(", ")||"nema čistog favorita";
+  mainDiag.innerHTML=`Najbolji momentum: <b class="green">${best.sym} ${fmtPct(best.ch)}</b>. Najslabiji: <b class="red">${worst.sym} ${fmtPct(worst.ch)}</b>.<br>Doktor prati: <b class="blue">${buy}</b>. Pravilo: ne juriti cijenu, čekati povrat i potvrdu.`;
+  for(const c of cards){
+    const fc=forecast(c.ch,c.rv), [cls,tag,txt]=c.dec;
+    const div=document.createElement("div");div.className="card";
+    div.innerHTML=`<div class="row"><div><div class="coin">${c.sym}</div><div class="gray">${c.id}</div></div><div style="text-align:right"><div class="price">${fmtPrice(c.price)}</div><div class="${c.ch>=0?'green':'red'}">${fmtPct(c.ch)}</div></div></div>
+    <div class="grid"><div class="box"><div class="label">Signal</div><div class="val ${cls}">${tag}</div></div><div class="box"><div class="label">RSI</div><div class="val">${c.rv?c.rv.toFixed(1):"n/a"}</div></div><div class="box"><div class="label">Volumen</div><div class="val">${c.d.usd_24h_vol?"$"+Math.round(c.d.usd_24h_vol/1e6)+"M":"n/a"}</div></div></div>
+    <canvas id="c_${c.id}"></canvas>
+    <div class="grid"><div class="box"><div class="label">2h</div><div class="val">${fc[0]}</div></div><div class="box"><div class="label">6h</div><div class="val">${fc[1]}</div></div><div class="box"><div class="label">24h</div><div class="val">${fc[2]}</div></div></div>
+    <div class="diag">${txt}</div>`;
+    list.appendChild(div);draw(document.getElementById("c_"+c.id),c.prices);
+  }
+  checkAlarm();
+ }catch(e){status.textContent="greška";mainDiag.textContent="Ne mogu dohvatiti cijene. Provjeri internet ili CoinGecko API limit."}
 }
-function toggleAuto(){
-  if(autoTimer){ clearInterval(autoTimer); autoTimer=null; autoBtn.textContent="Auto refresh: OFF"; return; }
-  loadAll(); autoTimer=setInterval(loadAll, 60000); autoBtn.textContent="Auto refresh: ON";
-}
-loadNote(); loadAlarm();
-if("serviceWorker" in navigator){ navigator.serviceWorker.register("sw.js"); }
+function toggleAuto(){if(autoTimer){clearInterval(autoTimer);autoTimer=null;autoBtn.textContent="Auto refresh: OFF";return}loadAll();autoTimer=setInterval(loadAll,60000);autoBtn.textContent="Auto refresh: ON"}
+loadNote();loadAlarm();if("serviceWorker"in navigator)navigator.serviceWorker.register("sw.js");
 </script>
 </body>
 </html>

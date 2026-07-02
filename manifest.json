@@ -1,10 +1,10 @@
 {
-  "name": "Doktor Kripta",
-  "short_name": "Kripta",
+  "name": "Doktor Kripta PRO",
+  "short_name": "Kripta PRO",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#050914",
-  "theme_color": "#07111f",
+  "theme_color": "#06111f",
   "icons": [
     {
       "src": "icon.svg",
