@@ -1,14 +1,12 @@
-# Doktor Kripta PRO v10
+# Doktor Kripta PRO v11
 
 Dodano:
-- Predviđanje 1h / 2h / 6h / 24h / 7d
-- AI score
-- Ulaz zona
-- Target
-- Stop-loss
-- Watchlista
-- XRP
-- RSI, MACD, EMA20/50/200, Bollinger
-- Portfolio i profit kalkulator
+- Vjerojatnost rasta/pada %
+- Fear/Greed procjena
+- Makro radar
+- Kalendar rizika
+- Dnevnik trgovanja
+- Akcija po coinu
+- AI dijagnoza poboljšana
 
 Nije financijski savjet.
