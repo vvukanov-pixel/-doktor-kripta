@@ -1,13 +1,14 @@
-# Doktor Kripta PRO v9
+# Doktor Kripta PRO v10
 
 Dodano:
-- Bollinger Bands
-- Podrška i otpor
-- Pouzdanost signala %
-- News bias priprema
-- Portfolio praćenje P/L
-- RSI, MACD, EMA20/50/200
-- Predviđanje 2h / 6h / 24h / 7d
-- Profit kalkulator
+- Predviđanje 1h / 2h / 6h / 24h / 7d
+- AI score
+- Ulaz zona
+- Target
+- Stop-loss
+- Watchlista
+- XRP
+- RSI, MACD, EMA20/50/200, Bollinger
+- Portfolio i profit kalkulator
 
 Nije financijski savjet.
