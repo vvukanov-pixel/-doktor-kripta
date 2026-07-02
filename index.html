@@ -6,14 +6,14 @@
 <meta name="theme-color" content="#06111f">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon.svg">
-<title>Doktor Kripta PRO v11</title>
+<title>Doktor Kripta PRO v12</title>
 <style>
 :root{--bg:#050914;--card:#111827;--line:#263244;--txt:#fff;--muted:#9ca3af;--green:#22c55e;--red:#ef4444;--yellow:#f59e0b;--blue:#38bdf8;--purple:#a78bfa}
 *{box-sizing:border-box}
 body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--txt)}
 header{padding:18px 16px;background:#0f172a;position:sticky;top:0;z-index:5;border-bottom:1px solid var(--line)}
 h1{margin:0;font-size:28px}.sub{color:var(--muted);font-size:14px;margin-top:3px}
-main{padding:14px;max-width:1020px;margin:auto}
+main{padding:14px;max-width:1040px;margin:auto}
 button,select,input,textarea{width:100%;padding:13px;border-radius:13px;border:1px solid #334155;background:#030712;color:white;font-size:15px}
 button{background:var(--green);color:#06120a;font-weight:900;border:0}.secondary{background:#1f2937;color:white;border:1px solid #334155}
 .toolbar{display:grid;grid-template-columns:1fr 1fr;gap:8px}.tabs{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:8px 0}
@@ -36,13 +36,13 @@ footer{padding:16px;color:#6b7280;font-size:12px;text-align:center}
 </head>
 <body>
 <header>
-<h1>🩺 Doktor Kripta PRO v11</h1>
-<div class="sub">AI signal · probability · fear/greed · events · dnevnik trgovanja</div>
+<h1>🩺 Doktor Kripta PRO v12</h1>
+<div class="sub">AI terminal · best pick · TP1/TP2/SL · RSI alarm · market regime</div>
 </header>
 
 <main>
 <div class="toolbar">
-<button onclick="loadAll()">Osvježi tržište</button>
+<button onclick="loadAll()">Analiziraj sve</button>
 <button class="secondary" onclick="toggleAuto()" id="autoBtn">Auto refresh: OFF</button>
 </div>
 
@@ -57,41 +57,26 @@ footer{padding:16px;color:#6b7280;font-size:12px;text-align:center}
 
 <section id="market">
 <div class="card">
-<div class="row"><b>Doktorova glavna dijagnoza</b><span class="pill" id="status">čekam refresh</span></div>
-<div class="diag" id="mainDiag">Pritisni “Osvježi tržište”.</div>
+<div class="row"><b>Doktorova glavna dijagnoza</b><span class="pill" id="status">čekam analizu</span></div>
+<div class="diag" id="mainDiag">Pritisni “Analiziraj sve”.</div>
 </div>
 <div id="list"></div>
 </section>
 
 <section id="watch" style="display:none">
-<div class="card"><b>Watchlista</b><div class="diag">Označi favorite na karticama coina. Ovdje se prikazuju samo tvoji favoriti.</div></div>
+<div class="card"><b>Watchlista</b><div class="diag">Označi favorite na karticama coina.</div></div>
 <div id="watchList"></div>
 </section>
 
 <section id="macro" style="display:none">
-<div class="card">
-<div class="row"><b>Makro radar</b><span class="pill">simulirana procjena</span></div>
-<div id="macroText" class="diag">Osvježi tržište pa će Doktor izračunati stanje.</div>
-</div>
-<div class="card">
-<b>Kalendar rizika</b>
-<div class="diag">
-• FED / kamate: visok utjecaj na BTC i altove<br>
-• ETF tokovi: pozitivan kad ulazi kapital<br>
-• Token unlock: rizik pritiska prodaje kod SUI/ARB/APT sličnih tokena<br>
-• Binance/SEC vijesti: mogu snažno pomaknuti tržište
-</div>
-</div>
+<div class="card"><div class="row"><b>Makro radar</b><span class="pill">v12</span></div><div id="macroText" class="diag">Osvježi tržište.</div></div>
+<div class="card"><b>Kalendar rizika</b><div class="diag">FED / CPI / ETF tokovi / SEC / Binance / Token unlock. Za live kalendar treba backend.</div></div>
 </section>
 
 <section id="journal" style="display:none">
 <div class="card">
-<div class="row"><b>Dnevnik trgovanja</b><span class="pill">sprema se na mobitel</span></div>
-<div class="grid">
-<div><div class="label">Coin</div><select id="jCoin"><option>SUI</option><option>BTC</option><option>ETH</option><option>SOL</option><option>LINK</option><option>AVAX</option><option>NEAR</option><option>XRP</option><option>PEPE</option><option>SHIB</option></select></div>
-<div><div class="label">Akcija</div><select id="jSide"><option>KUPNJA</option><option>PRODAJA</option><option>PLAN</option></select></div>
-<div><div class="label">Cijena</div><input id="jPrice" placeholder="0.62"></div>
-</div>
+<div class="row"><b>Dnevnik trgovanja</b><span class="pill">sprema se lokalno</span></div>
+<div class="grid"><div><div class="label">Coin</div><select id="jCoin"><option>SUI</option><option>BTC</option><option>ETH</option><option>SOL</option><option>LINK</option><option>AVAX</option><option>NEAR</option><option>XRP</option><option>PEPE</option><option>SHIB</option></select></div><div><div class="label">Akcija</div><select id="jSide"><option>KUPNJA</option><option>PRODAJA</option><option>PLAN</option></select></div><div><div class="label">Cijena</div><input id="jPrice" placeholder="0.62"></div></div>
 <textarea id="jNote" placeholder="Zašto ulazim / izlazim?"></textarea>
 <div style="margin-top:10px"><button onclick="saveJournal()">Spremi u dnevnik</button></div>
 <div class="diag" id="journalList"></div>
@@ -99,78 +84,63 @@ footer{padding:16px;color:#6b7280;font-size:12px;text-align:center}
 </section>
 
 <section id="profit" style="display:none">
-<div class="card">
-<div class="row"><b>Profit kalkulator</b><span class="pill">brzi izračun</span></div>
-<div class="grid">
-<div><div class="label">Ulog $</div><input id="stake" placeholder="1000"></div>
-<div><div class="label">Ulaz</div><input id="entry" placeholder="0.62"></div>
-<div><div class="label">Izlaz</div><input id="exit" placeholder="0.72"></div>
-</div>
-<div style="margin-top:10px"><button onclick="calcProfit()">Izračunaj</button></div>
-<div class="diag" id="profitText"></div>
-</div>
+<div class="card"><div class="row"><b>Profit kalkulator</b><span class="pill">brzi izračun</span></div>
+<div class="grid"><div><div class="label">Ulog $</div><input id="stake" placeholder="1000"></div><div><div class="label">Ulaz</div><input id="entry" placeholder="0.62"></div><div><div class="label">Izlaz</div><input id="exit" placeholder="0.72"></div></div>
+<div style="margin-top:10px"><button onclick="calcProfit()">Izračunaj</button></div><div class="diag" id="profitText"></div></div>
 </section>
 
 <section id="portfolio" style="display:none">
-<div class="card">
-<div class="row"><b>Portfolio</b><span class="pill">sprema se na mobitel</span></div>
-<div class="grid">
-<div><div class="label">Coin</div><select id="pfCoin"><option>BTC</option><option>ETH</option><option>SOL</option><option>SUI</option><option>LINK</option><option>AVAX</option><option>NEAR</option><option>XRP</option><option>PEPE</option><option>SHIB</option></select></div>
-<div><div class="label">Količina</div><input id="pfAmount" placeholder="npr. 1000"></div>
-<div><div class="label">Prosječni ulaz $</div><input id="pfEntry" placeholder="npr. 0.62"></div>
-</div>
-<div style="margin-top:10px"><button onclick="savePortfolio()">Spremi poziciju</button></div>
-<div class="diag" id="portfolioText"></div>
-</div>
+<div class="card"><div class="row"><b>Portfolio</b><span class="pill">sprema se lokalno</span></div>
+<div class="grid"><div><div class="label">Coin</div><select id="pfCoin"><option>BTC</option><option>ETH</option><option>SOL</option><option>SUI</option><option>LINK</option><option>AVAX</option><option>NEAR</option><option>XRP</option><option>PEPE</option><option>SHIB</option></select></div><div><div class="label">Količina</div><input id="pfAmount" placeholder="npr. 1000"></div><div><div class="label">Prosječni ulaz $</div><input id="pfEntry" placeholder="npr. 0.62"></div></div>
+<div style="margin-top:10px"><button onclick="savePortfolio()">Spremi poziciju</button></div><div class="diag" id="portfolioText"></div></div>
 </section>
 </main>
 
-<footer>Doktor Kripta PRO v11. Nije financijski savjet. Statička PWA verzija bez API ključeva burze.</footer>
+<footer>Doktor Kripta PRO v12. Nije financijski savjet. Bez API ključeva burze.</footer>
 
 <script>
 const coins=[["bitcoin","BTC"],["ethereum","ETH"],["solana","SOL"],["sui","SUI"],["chainlink","LINK"],["avalanche-2","AVAX"],["near","NEAR"],["ripple","XRP"],["pepe","PEPE"],["shiba-inu","SHIB"]];
 let latest={}, allCards=[], autoTimer=null;
-
-function setMode(id,btn){["market","watch","macro","journal","profit","portfolio"].forEach(x=>document.getElementById(x).style.display=x===id?"block":"none");document.querySelectorAll(".tab").forEach(b=>b.classList.remove("active"));btn.classList.add("active"); if(id==="portfolio") renderPortfolio(); if(id==="watch") renderWatch(); if(id==="journal") renderJournal();}
+function setMode(id,btn){["market","watch","macro","journal","profit","portfolio"].forEach(x=>document.getElementById(x).style.display=x===id?"block":"none");document.querySelectorAll(".tab").forEach(b=>b.classList.remove("active"));btn.classList.add("active");if(id==="portfolio")renderPortfolio();if(id==="watch")renderWatch();if(id==="journal")renderJournal()}
 function fmtPrice(p){if(p===undefined||p===null||isNaN(p))return"n/a";if(p<0.01)return"$"+Number(p).toPrecision(4);return"$"+Number(p).toLocaleString("en-US",{maximumFractionDigits:4})}
 function fmtPct(x){return(x===undefined||x===null)?"n/a":x.toFixed(2)+"%"}
 function sma(a,n){return(!a||a.length<n)?null:a.slice(-n).reduce((x,y)=>x+y,0)/n}
 function stdev(a){const m=a.reduce((x,y)=>x+y,0)/a.length;return Math.sqrt(a.reduce((x,y)=>x+(y-m)*(y-m),0)/a.length)}
-function ema(values,period){if(!values||values.length<period)return null;const k=2/(period+1);let e=sma(values.slice(0,period),period);for(let i=period;i<values.length;i++)e=values[i]*k+e*(1-k);return e}
-function emaSeries(values,period){if(!values||values.length<period)return[];const k=2/(period+1);let out=[],e=sma(values.slice(0,period),period);for(let i=period;i<values.length;i++){e=values[i]*k+e*(1-k);out.push(e)}return out}
-function macd(values){if(!values||values.length<35)return null;const e12=emaSeries(values,12),e26=emaSeries(values,26),start=e12.length-e26.length,line=e26.map((v,i)=>e12[i+start]-v),sig=ema(line,9),last=line.at(-1);return{line:last,signal:sig,hist:last-sig}}
-function rsi(prices){if(!prices||prices.length<15)return null;let g=0,l=0;for(let i=prices.length-14;i<prices.length;i++){let d=prices[i]-prices[i-1];if(d>=0)g+=d;else l-=d}if(l===0)return 100;let rs=(g/14)/(l/14);return 100-(100/(1+rs))}
-function volatility(prices){if(!prices||prices.length<10)return null;const rets=[];for(let i=1;i<prices.length;i++)rets.push((prices[i]-prices[i-1])/prices[i-1]);return stdev(rets)*100}
-function bollinger(prices){if(!prices||prices.length<20)return null;const s=prices.slice(-20),mid=sma(s,20),sd=stdev(s);return{low:mid-2*sd,mid,high:mid+2*sd,pos:(prices.at(-1)-(mid-2*sd))/((mid+2*sd)-(mid-2*sd))}}
-function supportResistance(prices){if(!prices||prices.length<20)return{support:null,resistance:null};const s=prices.slice(-60);return{support:Math.min(...s),resistance:Math.max(...s)}}
-function atrLike(prices){if(!prices||prices.length<20)return null;let moves=[];for(let i=1;i<prices.length;i++)moves.push(Math.abs(prices[i]-prices[i-1]));return sma(moves.slice(-20),20)}
-function scoreData(change,rv,price,e20,e50,e200,m,bb,vol){let s=50;if(change>5)s+=14;else if(change>2)s+=8;else if(change>0.5)s+=4;else if(change<-5)s-=14;else if(change<-2)s-=8;else if(change<-0.5)s-=4;if(rv!==null){if(rv<30)s+=8;else if(rv<40)s+=3;else if(rv>75)s-=8;else if(rv>65)s-=3}if(e20)s+=price>e20?6:-6;if(e50)s+=price>e50?6:-6;if(e200)s+=price>e200?8:-8;if(m)s+=m.hist>0?7:-7;if(bb){if(bb.pos<.15)s+=5;if(bb.pos>.9)s-=5}if(vol&&vol>3)s-=3;return Math.max(1,Math.min(99,Math.round(s)))}
-function decision(score){if(score>=75)return["green","KUPI","Kupci imaju jaku prednost. Ulaz samo na povratu, ne na svijeći."];if(score>=60)return["green","DRŽI / TRAŽI ULAZ","Trend je pozitivan. Čekati potvrdu iznad lokalnog otpora."];if(score>=45)return["yellow","ČEKAJ","Nema čiste prednosti."];if(score>=30)return["red","OPREZ / SMANJI","Prodavači imaju prednost."];return["red","PRODAJ / IZBJEGAVAJ","Slab trend. Čekati stabilizaciju."]}
-function predictPrices(price,score,vol){const bias=(score-50)/1000,v=Math.max(.006,Math.min(.055,(vol||1.2)/100*1.8)),p1=price*(1+bias*.25),p2=price*(1+bias*.55),p6=price*(1+bias*1.25),p24=price*(1+bias*2.5),p7=price*(1+bias*7.5);return{low1:p1*(1-v*.25),high1:p1*(1+v*.25),low2:p2*(1-v*.45),high2:p2*(1+v*.45),low6:p6*(1-v*.85),high6:p6*(1+v*.85),low24:p24*(1-v*1.6),high24:p24*(1+v*1.6),low7:p7*(1-v*3.2),high7:p7*(1+v*3.2)}}
-function probability(score,vol){let up=Math.round(score - Math.min(12,(vol||1)*2));up=Math.max(8,Math.min(92,up));return{up,down:100-up}}
-function confidence(score,vol){let c=Math.round(Math.abs(score-50)*1.35 + 38 - Math.min(22,(vol||1)*4));return Math.max(20,Math.min(90,c))}
-function targetStop(price,score,atr,support,resistance){const risk=(atr||price*.01);let target=score>=50?(resistance||price+risk*3):(support||price-risk*3);let stop=score>=50?(support||price-risk*2):(resistance||price+risk*2);return{target,stop}}
-function aiReason(c){let r=[]; if(c.rv<35)r.push("RSI nizak - mogući bounce"); if(c.rv>70)r.push("RSI visok - rizik hlađenja"); if(c.m&&c.m.hist>0)r.push("MACD pozitivan"); if(c.m&&c.m.hist<0)r.push("MACD negativan"); if(c.price>c.e20)r.push("iznad EMA20"); else r.push("ispod EMA20"); if(c.bb&&c.bb.pos>.85)r.push("blizu gornjeg Bollingera"); if(c.bb&&c.bb.pos<.2)r.push("blizu donjeg Bollingera"); return r.join(", ")+ "."}
-function fearGreed(cards){if(!cards.length)return 50;const avg=cards.reduce((a,c)=>a+c.score,0)/cards.length;const btc=cards.find(c=>c.sym==="BTC");let fg=avg;if(btc)fg=fg*.65+btc.score*.35;return Math.round(Math.max(1,Math.min(99,fg)))}
-function macroLabel(x){if(x>=70)return["green","Greed / risk-on"];if(x>=55)return["green","Blago pozitivno"];if(x>=45)return["yellow","Neutralno"];if(x>=30)return["red","Fear / risk-off"];return["red","Jaki strah"]}
-function saveJournal(){const arr=JSON.parse(localStorage.getItem("dk_journal")||"[]");arr.unshift({t:new Date().toLocaleString("hr-HR"),coin:jCoin.value,side:jSide.value,price:jPrice.value,note:jNote.value});localStorage.setItem("dk_journal",JSON.stringify(arr.slice(0,50)));renderJournal();}
+function ema(v,p){if(!v||v.length<p)return null;const k=2/(p+1);let e=sma(v.slice(0,p),p);for(let i=p;i<v.length;i++)e=v[i]*k+e*(1-k);return e}
+function emaSeries(v,p){if(!v||v.length<p)return[];const k=2/(p+1);let o=[],e=sma(v.slice(0,p),p);for(let i=p;i<v.length;i++){e=v[i]*k+e*(1-k);o.push(e)}return o}
+function macd(v){if(!v||v.length<35)return null;const e12=emaSeries(v,12),e26=emaSeries(v,26),s=e12.length-e26.length,line=e26.map((x,i)=>e12[i+s]-x),sig=ema(line,9),last=line.at(-1);return{line:last,signal:sig,hist:last-sig}}
+function rsi(p){if(!p||p.length<15)return null;let g=0,l=0;for(let i=p.length-14;i<p.length;i++){let d=p[i]-p[i-1];if(d>=0)g+=d;else l-=d}if(l===0)return 100;let rs=(g/14)/(l/14);return 100-(100/(1+rs))}
+function volatility(p){if(!p||p.length<10)return null;const r=[];for(let i=1;i<p.length;i++)r.push((p[i]-p[i-1])/p[i-1]);return stdev(r)*100}
+function bollinger(p){if(!p||p.length<20)return null;const s=p.slice(-20),mid=sma(s,20),sd=stdev(s);return{low:mid-2*sd,mid,high:mid+2*sd,pos:(p.at(-1)-(mid-2*sd))/((mid+2*sd)-(mid-2*sd))}}
+function sr(p){if(!p||p.length<20)return{support:null,resistance:null};const s=p.slice(-60);return{support:Math.min(...s),resistance:Math.max(...s)}}
+function atr(p){if(!p||p.length<20)return null;let m=[];for(let i=1;i<p.length;i++)m.push(Math.abs(p[i]-p[i-1]));return sma(m.slice(-20),20)}
+function scoreData(ch,rv,price,e20,e50,e200,m,bb,vol,volumeUsd){let s=50;if(ch>5)s+=14;else if(ch>2)s+=8;else if(ch>0.5)s+=4;else if(ch<-5)s-=14;else if(ch<-2)s-=8;else if(ch<-0.5)s-=4;if(rv!==null){if(rv<30)s+=8;else if(rv<40)s+=3;else if(rv>75)s-=8;else if(rv>65)s-=3}if(e20)s+=price>e20?6:-6;if(e50)s+=price>e50?6:-6;if(e200)s+=price>e200?8:-8;if(m)s+=m.hist>0?7:-7;if(bb){if(bb.pos<.15)s+=5;if(bb.pos>.9)s-=5}if(vol&&vol>3)s-=3;if(volumeUsd>200000000)s+=2;return Math.max(1,Math.min(99,Math.round(s)))}
+function decision(s){if(s>=78)return["green","STRONG BUY","Najbolji uvjeti. Ulaz na povratu, TP postepeno."];if(s>=65)return["green","BUY","Kupci imaju prednost, ali ne juriti cijenu."];if(s>=50)return["yellow","HOLD","Držati / čekati potvrdu."];if(s>=35)return["red","SELL RISK","Rizik pada je povišen."];return["red","AVOID","Slab trend. Izbjegavati dok se ne stabilizira."]}
+function predict(price,s,vol){const b=(s-50)/1000,v=Math.max(.006,Math.min(.055,(vol||1.2)/100*1.8));let mk=(mult,spread)=>{let p=price*(1+b*mult);return[p*(1-v*spread),p*(1+v*spread)]};let a1=mk(.25,.25),a2=mk(.55,.45),a6=mk(1.25,.85),a24=mk(2.5,1.6),a7=mk(7.5,3.2);return{low1:a1[0],high1:a1[1],low2:a2[0],high2:a2[1],low6:a6[0],high6:a6[1],low24:a24[0],high24:a24[1],low7:a7[0],high7:a7[1]}}
+function prob(s,vol){let up=Math.round(s-Math.min(12,(vol||1)*2));up=Math.max(8,Math.min(92,up));return{up,down:100-up}}
+function conf(s,vol){let c=Math.round(Math.abs(s-50)*1.35+38-Math.min(22,(vol||1)*4));return Math.max(20,Math.min(90,c))}
+function targets(price,s,a,sup,res){const risk=(a||price*.01);return{entryLow:sup||price-risk*1.5,entryHigh:price,tp1:s>=50?price+risk*2:price-risk*2,tp2:s>=50?(res||price+risk*4):(sup||price-risk*4),sl:s>=50?(sup||price-risk*2):(res||price+risk*2)}}
+function aiReason(c){let r=[];if(c.rv<35)r.push("RSI nizak");if(c.rv>70)r.push("RSI visok");if(c.m&&c.m.hist>0)r.push("MACD plus");if(c.m&&c.m.hist<0)r.push("MACD minus");r.push(c.price>c.e20?"iznad EMA20":"ispod EMA20");if(c.bb&&c.bb.pos>.85)r.push("gornji Bollinger");if(c.bb&&c.bb.pos<.2)r.push("donji Bollinger");return r.join(", ")}
+function fearGreed(cards){if(!cards.length)return 50;const avg=cards.reduce((a,c)=>a+c.score,0)/cards.length,btc=cards.find(c=>c.sym==="BTC");return Math.round(Math.max(1,Math.min(99,btc?avg*.65+btc.score*.35:avg)))}
+function macroLabel(x){if(x>=70)return["green","Risk ON"];if(x>=55)return["green","Blago bullish"];if(x>=45)return["yellow","Neutralno"];if(x>=30)return["red","Risk OFF"];return["red","Strah"]}
+function saveJournal(){const arr=JSON.parse(localStorage.getItem("dk_journal")||"[]");arr.unshift({t:new Date().toLocaleString("hr-HR"),coin:jCoin.value,side:jSide.value,price:jPrice.value,note:jNote.value});localStorage.setItem("dk_journal",JSON.stringify(arr.slice(0,50)));renderJournal()}
 function renderJournal(){const arr=JSON.parse(localStorage.getItem("dk_journal")||"[]");journalList.innerHTML=arr.length?arr.map(x=>`<div><b>${x.t}</b> · ${x.coin} · ${x.side} · ${x.price}<br>${x.note||""}</div><hr>`).join(""):"Nema zapisa."}
-function calcProfit(){const s=Number(stake.value),e=Number(entry.value),x=Number(exit.value);if(!s||!e||!x){profitText.textContent="Upiši ulog, ulaz i izlaz.";return}const coins=s/e,value=coins*x,profit=value-s,pct=profit/s*100;profitText.innerHTML=`Kupiš <b>${coins.toFixed(4)}</b> coina. Vrijednost: <b>$${value.toFixed(2)}</b>. Rezultat: <b class="${profit>=0?'green':'red'}">$${profit.toFixed(2)} (${pct.toFixed(2)}%)</b>.`}
+function calcProfit(){const s=Number(stake.value),e=Number(entry.value),x=Number(exit.value);if(!s||!e||!x){profitText.textContent="Upiši ulog, ulaz i izlaz.";return}const q=s/e,v=q*x,p=v-s,pc=p/s*100;profitText.innerHTML=`Kupiš <b>${q.toFixed(4)}</b> coina. Vrijednost: <b>$${v.toFixed(2)}</b>. Rezultat: <b class="${p>=0?'green':'red'}">$${p.toFixed(2)} (${pc.toFixed(2)}%)</b>.`}
 function savePortfolio(){const arr=JSON.parse(localStorage.getItem("dk_pf")||"[]").filter(x=>x.coin!==pfCoin.value);arr.push({coin:pfCoin.value,amount:Number(pfAmount.value),entry:Number(pfEntry.value)});localStorage.setItem("dk_pf",JSON.stringify(arr));renderPortfolio()}
 function renderPortfolio(){const arr=JSON.parse(localStorage.getItem("dk_pf")||"[]");if(!arr.length){portfolioText.innerHTML="Nema pozicija.";return}let total=0,cost=0,html="";arr.forEach(x=>{const p=latest[x.coin]?.price||0,v=x.amount*p,c=x.amount*x.entry,pl=v-c;total+=v;cost+=c;html+=`<div><b>${x.coin}</b>: ${x.amount} × ${fmtPrice(p)} = ${fmtPrice(v)} · P/L <span class="${pl>=0?'green':'red'}">${fmtPrice(pl)}</span></div>`});html+=`<br><b>Ukupno:</b> ${fmtPrice(total)} · P/L <span class="${total-cost>=0?'green':'red'}">${fmtPrice(total-cost)}</span>`;portfolioText.innerHTML=html}
 function toggleWatch(sym){let w=JSON.parse(localStorage.getItem("dk_watch")||"[]");w=w.includes(sym)?w.filter(x=>x!==sym):[...w,sym];localStorage.setItem("dk_watch",JSON.stringify(w));renderAllCards()}
-function renderWatch(){const w=JSON.parse(localStorage.getItem("dk_watch")||"[]");watchList.innerHTML="";allCards.filter(c=>w.includes(c.sym)).forEach(c=>watchList.appendChild(cardEl(c,true)));if(!watchList.innerHTML)watchList.innerHTML='<div class="card">Nema favorita. Vrati se na tržište i stisni ⭐ na coin.</div>'}
-function draw(canvas,prices){const ctx=canvas.getContext("2d"),w=canvas.width=canvas.clientWidth*devicePixelRatio,h=canvas.height=canvas.clientHeight*devicePixelRatio;ctx.clearRect(0,0,w,h);if(!prices||prices.length<2)return;const min=Math.min(...prices),max=Math.max(...prices),pad=18*devicePixelRatio;ctx.lineWidth=2.5*devicePixelRatio;ctx.beginPath();prices.forEach((p,i)=>{const x=pad+i*(w-2*pad)/(prices.length-1),y=h-pad-((p-min)/(max-min||1))*(h-2*pad);if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y)});ctx.strokeStyle=prices.at(-1)>=prices[0]?"#22c55e":"#ef4444";ctx.stroke()}
-function cardEl(c,watchMode=false){const[cls,tag,txt]=c.dec,t=targetStop(c.price,c.score,c.atr,c.sr.support,c.sr.resistance),w=JSON.parse(localStorage.getItem("dk_watch")||"[]"),prob=probability(c.score,c.vol);const div=document.createElement("div");div.className="card";div.innerHTML=`<div class="row"><div><div class="coin">${c.sym} <button class="secondary" style="display:inline;width:auto;padding:5px 8px" onclick="toggleWatch('${c.sym}')">${w.includes(c.sym)?"★":"☆"}</button></div><div class="gray">${c.id}</div></div><div style="text-align:right"><div class="price">${fmtPrice(c.price)}</div><div class="${c.ch>=0?'green':'red'}">${fmtPct(c.ch)}</div></div></div>
-<div class="grid"><div class="box"><div class="label">Signal</div><div class="val ${cls}">${tag}</div></div><div class="box"><div class="label">Rast / Pad</div><div class="val"><span class="green">${prob.up}%</span> / <span class="red">${prob.down}%</span></div></div><div class="box"><div class="label">Pouzdanost</div><div class="val purple">${c.conf}%</div></div></div>
+function renderWatch(){const w=JSON.parse(localStorage.getItem("dk_watch")||"[]");watchList.innerHTML="";allCards.filter(c=>w.includes(c.sym)).forEach(c=>watchList.appendChild(cardEl(c,true)));if(!watchList.innerHTML)watchList.innerHTML='<div class="card">Nema favorita. Stisni ☆ na coin.</div>'}
+function draw(canvas,p){const ctx=canvas.getContext("2d"),w=canvas.width=canvas.clientWidth*devicePixelRatio,h=canvas.height=canvas.clientHeight*devicePixelRatio;ctx.clearRect(0,0,w,h);if(!p||p.length<2)return;const mn=Math.min(...p),mx=Math.max(...p),pad=18*devicePixelRatio;ctx.lineWidth=2.5*devicePixelRatio;ctx.beginPath();p.forEach((v,i)=>{const x=pad+i*(w-2*pad)/(p.length-1),y=h-pad-((v-mn)/(mx-mn||1))*(h-2*pad);if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y)});ctx.strokeStyle=p.at(-1)>=p[0]?"#22c55e":"#ef4444";ctx.stroke()}
+function cardEl(c,watchMode=false){const[cls,tag,txt]=c.dec,t=targets(c.price,c.score,c.atr,c.sr.support,c.sr.resistance),w=JSON.parse(localStorage.getItem("dk_watch")||"[]"),p=prob(c.score,c.vol);const div=document.createElement("div");div.className="card";div.innerHTML=`<div class="row"><div><div class="coin">${c.sym} <button class="secondary" style="display:inline;width:auto;padding:5px 8px" onclick="toggleWatch('${c.sym}')">${w.includes(c.sym)?"★":"☆"}</button></div><div class="gray">${c.id}</div></div><div style="text-align:right"><div class="price">${fmtPrice(c.price)}</div><div class="${c.ch>=0?'green':'red'}">${fmtPct(c.ch)}</div></div></div>
+<div class="grid"><div class="box"><div class="label">Signal</div><div class="val ${cls}">${tag}</div></div><div class="box"><div class="label">Rast / Pad</div><div class="val"><span class="green">${p.up}%</span> / <span class="red">${p.down}%</span></div></div><div class="box"><div class="label">Pouzdanost</div><div class="val purple">${c.conf}%</div></div></div>
 <div class="grid"><div class="box"><div class="label">AI Score</div><div class="val ${cls}">${c.score}/100</div></div><div class="box"><div class="label">RSI</div><div class="val">${c.rv?c.rv.toFixed(1):"n/a"}</div></div><div class="box"><div class="label">MACD</div><div class="val ${c.m&&c.m.hist>=0?'green':'red'}">${c.m?c.m.hist.toFixed(4):"n/a"}</div></div></div>
 <canvas id="${watchMode?'w_':'c_'}${c.id}"></canvas>
-<div class="grid2"><div class="box"><div class="label">Ulaz zona</div><div class="val blue">${fmtPrice(c.sr.support)}–${fmtPrice(c.price)}</div></div><div class="box"><div class="label">Target</div><div class="val green">${fmtPrice(t.target)}</div></div><div class="box"><div class="label">Stop-loss</div><div class="val red">${fmtPrice(t.stop)}</div></div><div class="box"><div class="label">Otpor</div><div class="val red">${fmtPrice(c.sr.resistance)}</div></div></div>
+<div class="grid2"><div class="box"><div class="label">Entry zona</div><div class="val blue">${fmtPrice(t.entryLow)}–${fmtPrice(t.entryHigh)}</div></div><div class="box"><div class="label">TP1</div><div class="val green">${fmtPrice(t.tp1)}</div></div><div class="box"><div class="label">TP2</div><div class="val green">${fmtPrice(t.tp2)}</div></div><div class="box"><div class="label">Stop-loss</div><div class="val red">${fmtPrice(t.sl)}</div></div></div>
 <div class="grid2"><div class="box"><div class="label">1h</div><div class="val blue">${fmtPrice(c.pr.low1)}–${fmtPrice(c.pr.high1)}</div></div><div class="box"><div class="label">2h</div><div class="val blue">${fmtPrice(c.pr.low2)}–${fmtPrice(c.pr.high2)}</div></div><div class="box"><div class="label">6h</div><div class="val blue">${fmtPrice(c.pr.low6)}–${fmtPrice(c.pr.high6)}</div></div><div class="box"><div class="label">24h</div><div class="val blue">${fmtPrice(c.pr.low24)}–${fmtPrice(c.pr.high24)}</div></div><div class="box"><div class="label">7d</div><div class="val purple">${fmtPrice(c.pr.low7)}–${fmtPrice(c.pr.high7)}</div></div><div class="box"><div class="label">Volumen</div><div class="val">${c.d.usd_24h_vol?"$"+Math.round(c.d.usd_24h_vol/1e6)+"M":"n/a"}</div></div></div>
-<div class="diag"><b>AI dijagnoza:</b> ${txt}<br><b>Razlog:</b> ${aiReason(c)}<br><b>Akcija:</b> ${c.score>=60?"Traži ulaz blizu podrške i target na otporu.":c.score>=45?"Čekaj bolju potvrdu.":"Ne forsirati ulaz."}</div>`;setTimeout(()=>draw(document.getElementById((watchMode?'w_':'c_')+c.id),c.prices),20);return div}
+<div class="diag"><b>Doktorova dijagnoza:</b> ${txt}<br><b>Razlog:</b> ${aiReason(c)}<br><b>Plan:</b> ${c.score>=65?"Traži entry zonu, TP1 djelomično, TP2 ostatak.":c.score>=50?"Drži/čekaj potvrdu.":"Ne forsirati ulaz."}</div>`;setTimeout(()=>draw(document.getElementById((watchMode?'w_':'c_')+c.id),c.prices),20);return div}
 function renderAllCards(){list.innerHTML="";allCards.forEach(c=>list.appendChild(cardEl(c,false)))}
 async function chart(id){try{const r=await fetch(`https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=1`);if(!r.ok)return[];const j=await r.json();return(j.prices||[]).map(x=>x[1])}catch(e){return[]}}
-async function loadAll(){status.textContent="učitavam...";list.innerHTML="";try{const ids=coins.map(c=>c[0]).join(","),r=await fetch("https://api.coingecko.com/api/v3/simple/price?ids="+ids+"&vs_currencies=usd&include_24hr_change=true&include_24hr_vol=true&include_market_cap=true");if(!r.ok)throw new Error("api");const data=await r.json();status.textContent=new Date().toLocaleString("hr-HR");latest={};allCards=[];for(const [id,sym] of coins){const d=data[id]||{},prices=await chart(id),price=d.usd,ch=d.usd_24h_change??0,rv=rsi(prices),e20=ema(prices,20),e50=ema(prices,50),e200=ema(prices,200),m=macd(prices),vol=volatility(prices),bb=bollinger(prices),sr=supportResistance(prices),atr=atrLike(prices),score=scoreData(ch,rv,price,e20,e50,e200,m,bb,vol),dec=decision(score),pr=predictPrices(price,score,vol),conf=confidence(score,vol);allCards.push({id,sym,d,prices,price,ch,rv,e20,e50,e200,m,vol,bb,sr,atr,score,dec,pr,conf});latest[sym]={price,change:ch,score}}const best=[...allCards].sort((a,b)=>b.score-a.score)[0],worst=[...allCards].sort((a,b)=>a.score-b.score)[0],fg=fearGreed(allCards),ml=macroLabel(fg),buy=allCards.filter(c=>c.score>=60).map(c=>c.sym).join(", ")||"nema čistog favorita";mainDiag.innerHTML=`Najbolja ocjena: <b class="green">${best.sym} ${best.score}/100</b>. Najslabiji: <b class="red">${worst.sym} ${worst.score}/100</b>.<br>Fear/Greed: <b class="${ml[0]}">${fg}/100 ${ml[1]}</b>.<br>Doktor prati: <b class="blue">${buy}</b>.`;macroText.innerHTML=`Fear/Greed procjena: <b class="${ml[0]}">${fg}/100 ${ml[1]}</b><br>BTC score: <b>${latest.BTC?.score||"n/a"}/100</b><br>Tržišni režim: ${fg>=55?"risk-on, tražiti kvalitetne altove":"oprez, BTC dominira odluku"}<br>Whale/news/funding: pripremljeno za backend u v12.`;renderAllCards();renderPortfolio()}catch(e){status.textContent="greška";mainDiag.textContent="Ne mogu dohvatiti cijene. Provjeri internet ili CoinGecko API limit."}}
+async function loadAll(){status.textContent="učitavam...";list.innerHTML="";try{const ids=coins.map(c=>c[0]).join(","),r=await fetch("https://api.coingecko.com/api/v3/simple/price?ids="+ids+"&vs_currencies=usd&include_24hr_change=true&include_24hr_vol=true&include_market_cap=true");if(!r.ok)throw new Error("api");const data=await r.json();status.textContent=new Date().toLocaleString("hr-HR");latest={};allCards=[];for(const [id,sym] of coins){const d=data[id]||{},prices=await chart(id),price=d.usd,ch=d.usd_24h_change??0,rv=rsi(prices),e20=ema(prices,20),e50=ema(prices,50),e200=ema(prices,200),m=macd(prices),vol=volatility(prices),bb=bollinger(prices),srs=sr(prices),a=atr(prices),score=scoreData(ch,rv,price,e20,e50,e200,m,bb,vol,d.usd_24h_vol||0),dec=decision(score),pr=predict(price,score,vol),cf=conf(score,vol);allCards.push({id,sym,d,prices,price,ch,rv,e20,e50,e200,m,vol,bb,sr:srs,atr:a,score,dec,pr,conf:cf});latest[sym]={price,change:ch,score}}const best=[...allCards].sort((a,b)=>b.score-a.score)[0],worst=[...allCards].sort((a,b)=>a.score-b.score)[0],fg=fearGreed(allCards),ml=macroLabel(fg),buy=allCards.filter(c=>c.score>=65).map(c=>c.sym).join(", ")||"nema čistog favorita";mainDiag.innerHTML=`Najbolji pick: <b class="green">${best.sym} ${best.score}/100</b>. Najslabiji: <b class="red">${worst.sym} ${worst.score}/100</b>.<br>Fear/Greed: <b class="${ml[0]}">${fg}/100 ${ml[1]}</b>.<br>Doktor prati: <b class="blue">${buy}</b>.`;macroText.innerHTML=`Market regime: <b class="${ml[0]}">${ml[1]}</b><br>Fear/Greed: ${fg}/100<br>BTC score: ${latest.BTC?.score||"n/a"}/100<br>Whale/news/funding: za pravi live feed treba backend u v13.`;renderAllCards();renderPortfolio()}catch(e){status.textContent="greška";mainDiag.textContent="Ne mogu dohvatiti cijene. Provjeri internet ili CoinGecko API limit."}}
 function toggleAuto(){if(autoTimer){clearInterval(autoTimer);autoTimer=null;autoBtn.textContent="Auto refresh: OFF";return}loadAll();autoTimer=setInterval(loadAll,60000);autoBtn.textContent="Auto refresh: ON"}
 renderPortfolio();renderJournal();if("serviceWorker"in navigator)navigator.serviceWorker.register("sw.js");
 </script>

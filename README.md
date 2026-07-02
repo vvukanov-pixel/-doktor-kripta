@@ -1,12 +1,13 @@
-# Doktor Kripta PRO v11
+# Doktor Kripta PRO v12
 
 Dodano:
-- Vjerojatnost rasta/pada %
-- Fear/Greed procjena
-- Makro radar
-- Kalendar rizika
-- Dnevnik trgovanja
-- Akcija po coinu
-- AI dijagnoza poboljšana
+- Analiziraj sve
+- Best pick
+- Entry zona
+- TP1 / TP2
+- Stop-loss
+- Market regime
+- Poboljšani AI plan
+- 1h / 2h / 6h / 24h / 7d predviđanje
 
 Nije financijski savjet.
