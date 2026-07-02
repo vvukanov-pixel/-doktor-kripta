@@ -1,13 +1,13 @@
-# Doktor Kripta PRO v12
+# Doktor Kripta PRO v13
 
 Dodano:
-- Analiziraj sve
-- Best pick
-- Entry zona
-- TP1 / TP2
-- Stop-loss
-- Market regime
-- Poboljšani AI plan
-- 1h / 2h / 6h / 24h / 7d predviđanje
+- AI Trader zaključak
+- Scalp plan
+- Swing plan
+- RR omjer
+- Alert centar
+- Simulacija tradea
+- Poboljšan best pick
+- Lokalni dnevnik i portfolio
 
 Nije financijski savjet.
