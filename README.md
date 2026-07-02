@@ -1,13 +1,10 @@
-# Doktor Kripta PRO v13
+# Doktor Kripta PRO v14
 
-Dodano:
-- AI Trader zaključak
-- Scalp plan
-- Swing plan
-- RR omjer
-- Alert centar
-- Simulacija tradea
-- Poboljšan best pick
-- Lokalni dnevnik i portfolio
+Promjene:
+- Modernija ikona
+- Podstranice imaju ikone
+- USDC uklonjen / ne koristi se
+- Zadržan v13 AI trader
+- Tamniji moderniji izgled
 
 Nije financijski savjet.

@@ -3,22 +3,24 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#06111f">
+<meta name="theme-color" content="#07111f">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon.svg">
-<title>Doktor Kripta PRO v13</title>
+<title>Doktor Kripta PRO v14</title>
 <style>
 :root{--bg:#050914;--card:#111827;--line:#263244;--txt:#fff;--muted:#9ca3af;--green:#22c55e;--red:#ef4444;--yellow:#f59e0b;--blue:#38bdf8;--purple:#a78bfa}
 *{box-sizing:border-box}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--txt)}
-header{padding:18px 16px;background:#0f172a;position:sticky;top:0;z-index:5;border-bottom:1px solid var(--line)}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:radial-gradient(circle at top,#0b1b31 0,#050914 45%);color:var(--txt)}
+header{padding:18px 16px;background:linear-gradient(135deg,#0f172a,#07111f);position:sticky;top:0;z-index:5;border-bottom:1px solid var(--line)}
 h1{margin:0;font-size:28px}.sub{color:var(--muted);font-size:14px;margin-top:3px}
 main{padding:14px;max-width:1080px;margin:auto}
-button,select,input,textarea{width:100%;padding:13px;border-radius:13px;border:1px solid #334155;background:#030712;color:white;font-size:15px}
-button{background:var(--green);color:#06120a;font-weight:900;border:0}.secondary{background:#1f2937;color:white;border:1px solid #334155}
-.toolbar{display:grid;grid-template-columns:1fr 1fr;gap:8px}.tabs{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:8px 0}
-.tab{background:#0b1220;color:white;border:1px solid #334155}.active{background:#22c55e;color:#06120a}
-.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;margin:12px 0;box-shadow:0 8px 24px rgba(0,0,0,.16)}
+button,select,input,textarea{width:100%;padding:13px;border-radius:14px;border:1px solid #334155;background:#030712;color:white;font-size:15px}
+button{background:linear-gradient(135deg,#22c55e,#16a34a);color:#06120a;font-weight:900;border:0}.secondary{background:#1f2937;color:white;border:1px solid #334155}
+.toolbar{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tabs{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:8px 0}
+.tab{background:#0b1220;color:white;border:1px solid #334155;display:flex;align-items:center;justify-content:center;gap:6px;font-weight:800}
+.tab span{font-size:18px}.active{background:linear-gradient(135deg,#22c55e,#16a34a);color:#06120a}
+.card{background:rgba(17,24,39,.94);border:1px solid var(--line);border-radius:20px;padding:14px;margin:12px 0;box-shadow:0 8px 24px rgba(0,0,0,.18)}
 .row{display:flex;justify-content:space-between;gap:10px;align-items:center}
 .coin{font-weight:900;font-size:21px}.price{font-size:21px;font-weight:900}
 .green{color:var(--green)}.red{color:var(--red)}.yellow{color:var(--yellow)}.blue{color:var(--blue)}.purple{color:var(--purple)}
@@ -26,51 +28,54 @@ button{background:var(--green);color:#06120a;font-weight:900;border:0}.secondary
 .diag{font-size:15px;color:#d1d5db;margin-top:10px;line-height:1.42}
 .grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:10px}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
-.box{background:#030712;border:1px solid #334155;border-radius:12px;padding:9px}
+.box{background:#030712;border:1px solid #334155;border-radius:14px;padding:9px}
 .label{font-size:11px;color:var(--muted)} .val{font-size:14px;font-weight:900;margin-top:3px}
-canvas{width:100%;height:132px;margin-top:10px;background:#030712;border-radius:12px;border:1px solid #334155}
+canvas{width:100%;height:132px;margin-top:10px;background:#030712;border-radius:14px;border:1px solid #334155}
 textarea{min-height:90px;resize:vertical}
+.logoRow{display:flex;align-items:center;gap:10px}.miniLogo{width:38px;height:38px;border-radius:12px}
 footer{padding:16px;color:#6b7280;font-size:12px;text-align:center}
-@media(max-width:520px){.grid,.grid2{grid-template-columns:1fr 1fr}.toolbar{grid-template-columns:1fr}.tabs{grid-template-columns:1fr 1fr 1fr}h1{font-size:25px}}
+@media(max-width:520px){.grid,.grid2{grid-template-columns:1fr 1fr}.toolbar{grid-template-columns:1fr}.tabs{grid-template-columns:1fr 1fr 1fr}.tab{font-size:13px}h1{font-size:25px}}
 </style>
 </head>
 <body>
 <header>
-<h1>🩺 Doktor Kripta PRO v13</h1>
-<div class="sub">AI trader · RR omjer · scalp/swing plan · alert centar · simulacija</div>
+<div class="logoRow">
+<img src="icon.svg" class="miniLogo">
+<div><h1>Doktor Kripta PRO v14</h1><div class="sub">modern icon · tab ikone · bez USDC · AI trader</div></div>
+</div>
 </header>
 
 <main>
 <div class="toolbar">
-<button onclick="loadAll()">Analiziraj sve</button>
-<button class="secondary" onclick="toggleAuto()" id="autoBtn">Auto refresh: OFF</button>
+<button onclick="loadAll()">⚡ Analiziraj sve</button>
+<button class="secondary" onclick="toggleAuto()" id="autoBtn">🔄 Auto refresh: OFF</button>
 </div>
 
 <div class="tabs">
-<button class="tab active" onclick="setMode('market',this)">Tržište</button>
-<button class="tab" onclick="setMode('watch',this)">Watch</button>
-<button class="tab" onclick="setMode('alerts',this)">Alerti</button>
-<button class="tab" onclick="setMode('journal',this)">Dnevnik</button>
-<button class="tab" onclick="setMode('sim',this)">Sim</button>
-<button class="tab" onclick="setMode('portfolio',this)">Portfolio</button>
+<button class="tab active" onclick="setMode('market',this)"><span>📊</span>Tržište</button>
+<button class="tab" onclick="setMode('watch',this)"><span>⭐</span>Watch</button>
+<button class="tab" onclick="setMode('alerts',this)"><span>🚨</span>Alerti</button>
+<button class="tab" onclick="setMode('journal',this)"><span>📝</span>Dnevnik</button>
+<button class="tab" onclick="setMode('sim',this)"><span>🎯</span>Sim</button>
+<button class="tab" onclick="setMode('portfolio',this)"><span>💼</span>Portfolio</button>
 </div>
 
 <section id="market">
 <div class="card">
-<div class="row"><b>Doktorova glavna dijagnoza</b><span class="pill" id="status">čekam analizu</span></div>
+<div class="row"><b>🩺 Doktorova glavna dijagnoza</b><span class="pill" id="status">čekam analizu</span></div>
 <div class="diag" id="mainDiag">Pritisni “Analiziraj sve”.</div>
 </div>
 <div id="list"></div>
 </section>
 
 <section id="watch" style="display:none">
-<div class="card"><b>Watchlista</b><div class="diag">Označi favorite na karticama coina.</div></div>
+<div class="card"><b>⭐ Watchlista</b><div class="diag">Označi favorite na karticama coina.</div></div>
 <div id="watchList"></div>
 </section>
 
 <section id="alerts" style="display:none">
 <div class="card">
-<div class="row"><b>AI Alert centar</b><span class="pill">lokalno</span></div>
+<div class="row"><b>🚨 AI Alert centar</b><span class="pill">lokalno</span></div>
 <div class="grid">
 <div><div class="label">Coin</div><select id="aCoin"><option>SUI</option><option>BTC</option><option>ETH</option><option>SOL</option><option>LINK</option><option>AVAX</option><option>NEAR</option><option>XRP</option><option>PEPE</option><option>SHIB</option></select></div>
 <div><div class="label">Cijena ispod</div><input id="aBelow" placeholder="0.62"></div>
@@ -83,7 +88,7 @@ footer{padding:16px;color:#6b7280;font-size:12px;text-align:center}
 
 <section id="journal" style="display:none">
 <div class="card">
-<div class="row"><b>Dnevnik trgovanja</b><span class="pill">sprema se lokalno</span></div>
+<div class="row"><b>📝 Dnevnik trgovanja</b><span class="pill">sprema se lokalno</span></div>
 <div class="grid"><div><div class="label">Coin</div><select id="jCoin"><option>SUI</option><option>BTC</option><option>ETH</option><option>SOL</option><option>LINK</option><option>AVAX</option><option>NEAR</option><option>XRP</option><option>PEPE</option><option>SHIB</option></select></div><div><div class="label">Akcija</div><select id="jSide"><option>KUPNJA</option><option>PRODAJA</option><option>PLAN</option></select></div><div><div class="label">Cijena</div><input id="jPrice" placeholder="0.62"></div></div>
 <textarea id="jNote" placeholder="Zašto ulazim / izlazim?"></textarea>
 <div style="margin-top:10px"><button onclick="saveJournal()">Spremi u dnevnik</button></div>
@@ -93,7 +98,7 @@ footer{padding:16px;color:#6b7280;font-size:12px;text-align:center}
 
 <section id="sim" style="display:none">
 <div class="card">
-<div class="row"><b>Simulacija tradea</b><span class="pill">RR i P/L</span></div>
+<div class="row"><b>🎯 Simulacija tradea</b><span class="pill">RR i P/L</span></div>
 <div class="grid">
 <div><div class="label">Ulog $</div><input id="sStake" placeholder="1000"></div>
 <div><div class="label">Entry</div><input id="sEntry" placeholder="0.62"></div>
@@ -109,13 +114,13 @@ footer{padding:16px;color:#6b7280;font-size:12px;text-align:center}
 </section>
 
 <section id="portfolio" style="display:none">
-<div class="card"><div class="row"><b>Portfolio</b><span class="pill">sprema se lokalno</span></div>
+<div class="card"><div class="row"><b>💼 Portfolio</b><span class="pill">sprema se lokalno</span></div>
 <div class="grid"><div><div class="label">Coin</div><select id="pfCoin"><option>BTC</option><option>ETH</option><option>SOL</option><option>SUI</option><option>LINK</option><option>AVAX</option><option>NEAR</option><option>XRP</option><option>PEPE</option><option>SHIB</option></select></div><div><div class="label">Količina</div><input id="pfAmount" placeholder="npr. 1000"></div><div><div class="label">Prosječni ulaz $</div><input id="pfEntry" placeholder="npr. 0.62"></div></div>
 <div style="margin-top:10px"><button onclick="savePortfolio()">Spremi poziciju</button></div><div class="diag" id="portfolioText"></div></div>
 </section>
 </main>
 
-<footer>Doktor Kripta PRO v13. Nije financijski savjet. Bez API ključeva burze.</footer>
+<footer>Doktor Kripta PRO v14. Nije financijski savjet. Nema USDC.</footer>
 
 <script>
 const coins=[["bitcoin","BTC"],["ethereum","ETH"],["solana","SOL"],["sui","SUI"],["chainlink","LINK"],["avalanche-2","AVAX"],["near","NEAR"],["ripple","XRP"],["pepe","PEPE"],["shiba-inu","SHIB"]];
