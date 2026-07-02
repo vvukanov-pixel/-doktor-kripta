@@ -1,10 +1,11 @@
-# Doktor Kripta PRO v14
+# Doktor Kripta PRO v15 FINAL
 
 Promjene:
+- USDC vraćen kao cash/stablecoin
 - Modernija ikona
-- Podstranice imaju ikone
-- USDC uklonjen / ne koristi se
-- Zadržan v13 AI trader
-- Tamniji moderniji izgled
+- Podstranice s ikonama
+- Portfolio računa USDC kao gotovinu
+- Simulacija koristi ulog u USDC
+- Zadržan AI trader, RR, scalp/swing plan
 
 Nije financijski savjet.
