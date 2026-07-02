@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#06111f">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon.svg">
-<title>Doktor Kripta PRO</title>
+<title>Doktor Kripta PRO v7</title>
 <style>
 :root{--bg:#050914;--card:#111827;--card2:#0b1220;--line:#263244;--txt:#fff;--muted:#9ca3af;--green:#22c55e;--red:#ef4444;--yellow:#f59e0b;--blue:#38bdf8}
 *{box-sizing:border-box}
@@ -36,7 +36,7 @@ footer{padding:16px;color:#6b7280;font-size:12px;text-align:center}
 <body>
 <header>
 <h1>🩺 Doktor Kripta PRO</h1>
-<div class="sub">live cijene · graf 24h · RSI · signal · alarm · plan</div>
+<div class="sub">live cijene · RSI · signal · predviđanje cijene · alarm</div>
 </header>
 
 <main>
@@ -107,6 +107,28 @@ function decision(change,rv,price,ma20,ma50,vol){
  return["red","OPREZ","Slabost je prisutna. Ulaz samo mali i uz strogi plan."];
 }
 function forecast(change,rv){if(change>3&&rv<70)return["2h: moguć nastavak gore","6h: čuvati dobit","24h: zeleno, ali volatilno"];if(change>0.5)return["2h: blago gore","6h: raspon prema gore","24h: pozitivan nagib"];if(change>-0.5)return["2h: neutralno","6h: čekanje","24h: bez jasnog smjera"];if(change>-3)return["2h: pritisak dolje","6h: traži podršku","24h: oprez"];return["2h: crvena zona","6h: rizičan bounce moguć","24h: slab trend"]}
+function predictPrices(price, change, rv, ma20, ma50){
+ let bias = 0;
+ if(change>4) bias=0.018; else if(change>1) bias=0.008; else if(change<-4) bias=-0.018; else if(change<-1) bias=-0.008;
+ if(rv!==null && rv>72) bias-=0.006;
+ if(rv!==null && rv<32) bias+=0.006;
+ if(ma20 && price>ma20) bias+=0.004; else if(ma20 && price<ma20) bias-=0.004;
+ if(ma50 && price>ma50) bias+=0.004; else if(ma50 && price<ma50) bias-=0.004;
+
+ const p2 = price * (1 + bias * 0.35);
+ const p6 = price * (1 + bias * 0.80);
+ const p24 = price * (1 + bias * 1.60);
+
+ return {
+   low2: p2 * 0.992, high2: p2 * 1.008,
+   low6: p6 * 0.982, high6: p6 * 1.018,
+   low24: p24 * 0.955, high24: p24 * 1.045
+ };
+}
+function predText(p){
+ return `${fmtPrice(p.low2)}–${fmtPrice(p.high2)} · ${fmtPrice(p.low6)}–${fmtPrice(p.high6)} · ${fmtPrice(p.low24)}–${fmtPrice(p.high24)}`;
+}
+
 function saveNote(){localStorage.setItem("dk_note",note.value);localStorage.setItem("dk_saved",new Date().toLocaleString("hr-HR"));loadNote()}
 function loadNote(){note.value=localStorage.getItem("dk_note")||"";savedAt.textContent=localStorage.getItem("dk_saved")||"nije spremljeno"}
 function saveAlarm(){localStorage.setItem("dk_alarm",JSON.stringify({coin:alarmCoin.value,below:alarmBelow.value,above:alarmAbove.value}));loadAlarm();checkAlarm()}
@@ -129,15 +151,16 @@ async function loadAll(){
   }
   const best=[...cards].sort((a,b)=>b.ch-a.ch)[0], worst=[...cards].sort((a,b)=>a.ch-b.ch)[0];
   const buy=cards.filter(c=>c.dec[0]==="green").map(c=>c.sym).join(", ")||"nema čistog favorita";
-  mainDiag.innerHTML=`Najbolji momentum: <b class="green">${best.sym} ${fmtPct(best.ch)}</b>. Najslabiji: <b class="red">${worst.sym} ${fmtPct(worst.ch)}</b>.<br>Doktor prati: <b class="blue">${buy}</b>. Pravilo: ne juriti cijenu, čekati povrat i potvrdu.`;
+  mainDiag.innerHTML=`Najbolji momentum: <b class="green">${best.sym} ${fmtPct(best.ch)}</b>. Najslabiji: <b class="red">${worst.sym} ${fmtPct(worst.ch)}</b>.<br>Doktor prati: <b class="blue">${buy}</b>. Predviđanje je matematička procjena iz 24h grafa, RSI-ja i momentuma. Pravilo: ne juriti cijenu, čekati povrat i potvrdu.`;
   for(const c of cards){
-    const fc=forecast(c.ch,c.rv), [cls,tag,txt]=c.dec;
+    const fc=forecast(c.ch,c.rv), pr=predictPrices(c.price,c.ch,c.rv,c.ma20,c.ma50), [cls,tag,txt]=c.dec;
     const div=document.createElement("div");div.className="card";
     div.innerHTML=`<div class="row"><div><div class="coin">${c.sym}</div><div class="gray">${c.id}</div></div><div style="text-align:right"><div class="price">${fmtPrice(c.price)}</div><div class="${c.ch>=0?'green':'red'}">${fmtPct(c.ch)}</div></div></div>
     <div class="grid"><div class="box"><div class="label">Signal</div><div class="val ${cls}">${tag}</div></div><div class="box"><div class="label">RSI</div><div class="val">${c.rv?c.rv.toFixed(1):"n/a"}</div></div><div class="box"><div class="label">Volumen</div><div class="val">${c.d.usd_24h_vol?"$"+Math.round(c.d.usd_24h_vol/1e6)+"M":"n/a"}</div></div></div>
     <canvas id="c_${c.id}"></canvas>
-    <div class="grid"><div class="box"><div class="label">2h</div><div class="val">${fc[0]}</div></div><div class="box"><div class="label">6h</div><div class="val">${fc[1]}</div></div><div class="box"><div class="label">24h</div><div class="val">${fc[2]}</div></div></div>
-    <div class="diag">${txt}</div>`;
+    <div class="grid"><div class="box"><div class="label">Smjer 2h</div><div class="val">${fc[0]}</div></div><div class="box"><div class="label">Smjer 6h</div><div class="val">${fc[1]}</div></div><div class="box"><div class="label">Smjer 24h</div><div class="val">${fc[2]}</div></div></div>
+    <div class="grid"><div class="box"><div class="label">Cijena 2h</div><div class="val blue">${fmtPrice(pr.low2)}–${fmtPrice(pr.high2)}</div></div><div class="box"><div class="label">Cijena 6h</div><div class="val blue">${fmtPrice(pr.low6)}–${fmtPrice(pr.high6)}</div></div><div class="box"><div class="label">Cijena 24h</div><div class="val blue">${fmtPrice(pr.low24)}–${fmtPrice(pr.high24)}</div></div></div>
+    <div class="diag">${txt}<br><br><b>Predviđanje cijene:</b> 2h / 6h / 24h raspon je procjena, ne garancija.</div>`;
     list.appendChild(div);draw(document.getElementById("c_"+c.id),c.prices);
   }
   checkAlarm();
