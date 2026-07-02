@@ -1,13 +1,13 @@
-# Doktor Kripta PRO v8
+# Doktor Kripta PRO v9
 
 Dodano:
-- RSI
-- MACD
-- EMA20 / EMA50 / EMA200
-- Ocjena tržišta 1-100
-- Predviđanje cijene 2h / 6h / 24h / 7d
+- Bollinger Bands
+- Podrška i otpor
+- Pouzdanost signala %
+- News bias priprema
+- Portfolio praćenje P/L
+- RSI, MACD, EMA20/50/200
+- Predviđanje 2h / 6h / 24h / 7d
 - Profit kalkulator
-- Alarmi cijene
-- Plan trgovanja
 
 Nije financijski savjet.
