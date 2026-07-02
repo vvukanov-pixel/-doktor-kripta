@@ -1,15 +1,12 @@
-# Doktor Kripta PRO v7
+# Doktor Kripta PRO v8
 
-PWA za kripto praćenje.
-
-## Funkcije
-- Live cijene preko CoinGecko API-ja
-- BTC, ETH, SOL, SUI, LINK, AVAX, NEAR, PEPE, SHIB
-- Graf 24h
-- RSI procjena
-- Signal KUPI / ČEKAJ / PRODAJ
-- Smjer 2h / 6h / 24h
-- Predviđanje cijene 2h / 6h / 24h
+Dodano:
+- RSI
+- MACD
+- EMA20 / EMA50 / EMA200
+- Ocjena tržišta 1-100
+- Predviđanje cijene 2h / 6h / 24h / 7d
+- Profit kalkulator
 - Alarmi cijene
 - Plan trgovanja
 
